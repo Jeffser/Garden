@@ -1,0 +1,6 @@
+data/com.jeffser.Garden.desktop.in
+data/com.jeffser.Garden.metainfo.xml.in
+data/com.jeffser.Garden.gschema.xml
+src/main.py
+src/window.py
+src/window.ui

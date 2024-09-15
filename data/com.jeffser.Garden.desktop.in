@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=garden
+Exec=garden
+Icon=com.jeffser.Garden
+Terminal=false
+Type=Application
+Categories=GTK;
+StartupNotify=true

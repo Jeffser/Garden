@@ -1,0 +1,10 @@
+.shimeji_card {
+  padding: 10px;
+}
+.shimeji_card spinbutton {
+  border-radius: 10px;
+}
+.shimeji_card label {
+  padding-left: 9px;
+  padding-right: 9px;
+}

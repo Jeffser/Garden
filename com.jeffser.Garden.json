@@ -1,0 +1,80 @@
+{
+    "id" : "com.jeffser.Garden",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "46",
+    "sdk" : "org.gnome.Sdk",
+    "command" : "garden",
+    "sdk-extensions" : [ "org.freedesktop.Sdk.Extension.openjdk11" ],
+    "finish-args" : [
+        "--share=network",
+        "--share=ipc",
+        "--socket=wayland",
+        "--socket=x11",
+        "--device=dri",
+        "--env=PATH=/app/jre/bin:/usr/bin:/app/bin"
+    ],
+    "cleanup" : [
+        "/include",
+        "/lib/pkgconfig",
+        "/man",
+        "/share/doc",
+        "/share/gtk-doc",
+        "/share/man",
+        "/share/pkgconfig",
+        "*.la",
+        "*.a"
+    ],
+    "modules" : [
+        {
+	    "name": "openjdk",
+	    "buildsystem": "simple",
+	    "build-commands": [ "/usr/lib/sdk/openjdk11/install.sh" ]
+	},
+    	{
+    	    "name" : "Linux-Shimeji",
+    	    "buildsystem" : "simple",
+    	    "build-commands" : [
+		"mkdir ${FLATPAK_DEST}/shimeji",
+		"cp -r Shimeji.jar conf/ lib/ ${FLATPAK_DEST}/shimeji"
+    	    ],
+    	    "sources" : [
+    	    	{
+    	    	    "type" : "git",
+    	    	    "url" : "https://github.com/asdfman/linux-shimeji.git",
+    	    	    "branch" : "master",
+    	    	    "commit" : "bd6b7d526b29a1f59cb62134c9b7490d48ef530d"
+    	    	}
+    	    ]
+    	},
+    	{
+	    "name": "python3-colorthief",
+	    "buildsystem": "simple",
+	    "build-commands": [
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"colorthief\" --no-build-isolation"
+	    ],
+	    "sources": [
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/56/18/be03b7058e65f9df479b14e7af4e73945ce311e07aaad45cf2536e14791a/colorthief-0.2.1-py2.py3-none-any.whl",
+		    "sha256": "b04fc8ce5cf9c888768745e29cb19b7b688d5711af6fba26e8057debabec56b9"
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/cd/74/ad3d526f3bf7b6d3f408b73fde271ec69dfac8b81341a318ce825f2b3812/pillow-10.4.0.tar.gz",
+		    "sha256": "166c1cd4d24309b30d61f79f4a9114b7b2313d7450912277855ff5dfd7cd4a06"
+		}
+	    ]
+	},
+        {
+            "name" : "garden",
+            "builddir" : true,
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "file:///home/tentri/Documents/Projects"
+                }
+            ]
+        }
+    ]
+}
