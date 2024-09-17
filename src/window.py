@@ -255,7 +255,13 @@ class GardenWindow(Adw.ApplicationWindow):
 
 
     def add_shimeji_selector(self, shime_name:str):
-        shime_sel = shimeji_selector(shime_name, self)
+        try:
+            if not os.path.isfile(os.path.join(os.environ['XDG_DATA_HOME'], 'shimeji', shime_name, 'Shimeji.jar')):
+                raise FileNotFoundError
+            shime_sel = shimeji_selector(shime_name, self)
+        except Exception as e:
+            print(e)
+            return
         self.shimeji_container.append(shime_sel)
         shime_sel.get_parent().set_valign(1)
         shime_sel.get_parent().set_focusable(False)
