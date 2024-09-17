@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from gi.repository import Adw, Gtk, Gdk
-import os, threading, uuid, shutil, time, subprocess, re
+import os, shutil, re
 from zipfile import ZipFile
 from .custom_widgets import shimeji_widget
 

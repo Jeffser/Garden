@@ -1,7 +1,7 @@
 
 from gi.repository import Adw, Gtk, Gdk
 from colorthief import ColorThief
-import os, shutil
+import os, shutil, uuid, subprocess, threading
 
 window=None
 
