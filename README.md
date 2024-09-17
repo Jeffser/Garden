@@ -7,7 +7,7 @@
 
 ## Installation
 
-Please use the Flatpak package provided in the releases page, thanks!
+Please use the Flatpak package provided in the [releases page](https://github.com/Jeffser/Garden/releases/), thanks!
 
 ## Known Issues
 
