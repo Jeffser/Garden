@@ -228,6 +228,11 @@ class GardenWindow(Adw.ApplicationWindow):
                     if os.path.isdir(os.path.join(old_dir, 'img', 'Shimeji')):
                         for image in os.listdir(os.path.join(old_dir, 'img', 'Shimeji')):
                             shutil.move(os.path.join(old_dir, 'img', 'Shimeji', image), os.path.join(new_dir, 'img'))
+                    else:
+                        for file in os.listdir(os.path.join(old_dir, 'img')):
+                            shutil.move(os.path.join(old_dir, 'img', file), os.path.join(new_dir, 'img'))
+
+                    if not os.path.isfile(os.path.join(new_dir, 'img', 'icon.png')):
                         shutil.move(os.path.join(old_dir, 'img', 'icon.png'), os.path.join(new_dir, 'img'))
 
                     custom_conf=False
@@ -257,6 +262,8 @@ class GardenWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        if not os.path.isdir(os.path.join(os.environ['XDG_DATA_HOME'], 'shimeji')):
+            os.makedirs(os.path.join(os.environ['XDG_DATA_HOME'], 'shimeji'))
         drop_target=Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
         self.shimeji_scroller.add_controller(drop_target)
