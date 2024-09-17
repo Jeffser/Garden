@@ -4,6 +4,9 @@
   <requires lib="Adw" version="1.0"/>
   <template class="GardenWindow" parent="AdwApplicationWindow">
     <signal name="close-request" handler="closing_app"/>
+    <style>
+      <class name="devel"/>
+    </style>
     <property name="width-request">400</property>
     <property name="height-request">400</property>
     <property name="default-width">1300</property>
@@ -49,14 +52,52 @@
           </object>
         </child>
         <property name="content">
-          <object class="GtkScrolledWindow" id="shimeji_scroller">
-            <property name="margin-bottom">10</property>
-            <property name="margin-start">10</property>
-            <property name="margin-end">10</property>
+          <object class="GtkStack" id="window_stack">
             <child>
-              <object class="GtkFlowBox" id="shimeji_container">
-                <property name="selection-mode">0</property>
-                <property name="valign">1</property>
+              <object class="GtkStackPage">
+                <property name="name">normal</property>
+                <property name="child">
+                  <object class="GtkScrolledWindow" id="shimeji_scroller">
+                    <property name="margin-bottom">10</property>
+                    <property name="margin-start">10</property>
+                    <property name="margin-end">10</property>
+                    <child>
+                      <object class="GtkFlowBox" id="shimeji_container">
+                        <property name="selection-mode">0</property>
+                        <property name="valign">1</property>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkStackPage">
+                <property name="name">no_results</property>
+                <property name="child">
+                  <object class="AdwStatusPage">
+                    <property name="title" translatable="yes">No Shimejis Found</property>
+                    <property name="description" translatable="yes">Please try a different search term</property>
+                    <property name="icon-name">edit-find-symbolic</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkStackPage">
+                <property name="name">empty</property>
+                <property name="child">
+                  <object class="AdwStatusPage">
+                    <property name="title" translatable="yes">No Shimejis Found</property>
+                    <property name="description" translatable="yes">To add a Shimeji please drop one into the window (only zip for now), you can find Shimejis on DevianArt</property>
+                    <child>
+                      <object class="GtkLinkButton">
+                        <property name="label" translatable="yes">Shimejis on DevianArt</property>
+                        <property name="uri">https://www.deviantart.com/tag/shimeji</property>
+                      </object>
+                    </child>
+                  </object>
+                </property>
               </object>
             </child>
           </object>

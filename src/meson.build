@@ -32,4 +32,9 @@ garden_sources = [
   'window.py',
 ]
 
+custom_widgets = [
+  'custom_widgets/shimeji_widget.py'
+]
+
 install_data(garden_sources, install_dir: moduledir)
+install_data(custom_widgets, install_dir: moduledir / 'custom_widgets')
